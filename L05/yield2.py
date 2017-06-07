@@ -1,31 +1,11 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
+#grep -rl 'python' /root
 
-#Author:xp
-#blog_url: http://blog.csdn.net/wuxingpu5/article/details/71209731
 
-#模拟grep
-
-import os
-#windows下路径是两个斜杠 需要加r  raw string 原生字符串
-#g=os.walk(r'D:\code\py\py3\Coursepy\L05\a')
-
-# # for i in g:
-# #     print(i)
-# def search(search_path):
-#     g=os.walk(search_path)
-#     for par_idr,_,files in g:  #循环取出路径与文件
-#         for file in files:
-#             file_abs_path=r'%s%s' %(par_idr,file)
-#             print(file_abs_path)
-# search(r'D:\code\py\py3\Coursepy\L05\a')
-#====================================================
-#再次更改为yield模式 实现可以不停的send
 import os
 
 def init(func):
     def wrapper(*args,**kwargs):
-        res =func(*args,**kwargs)
+        res=func(*args,**kwargs)
         next(res)
         return res
     return wrapper
@@ -35,21 +15,69 @@ def search(target):
     while True:
         search_path=yield
         g=os.walk(search_path)
-        for par_idr,_,files in g:  #循环取出路径与文件
+        for par_dir,_,files in g:
             for file in files:
-                file_abs_path=r'%s%s' %(par_idr,file)
-                #print(file_abs_path)
+                file_abs_path=r'%s\%s' %(par_dir,file)
+                # print(file_abs_path)
                 target.send(file_abs_path)
-x=r'D:\code\py\py3\Coursepy\L05\a'
-#g=search()
-#g.send(x)
 
 @init
-def opener():
+def opener(target):
     while True:
         file_abs_path=yield
+        # print('opener func==>',file_abs_path)
         with open(file_abs_path,encoding='utf-8') as f:
-#            target.send(file_abs_path,f)
-             pass
-g=search(opener())
-g.send(r'D:\code\py\py3\Coursepy\L05\a')
+            target.send((file_abs_path,f))
+
+@init
+def cat(target):
+    while True:
+        file_abs_path,f=yield  #(file_abs_path,f)
+        for line in f:
+            tag=target.send((file_abs_path,line))
+            if tag:
+                break
+@init
+def grep(target,pattern):
+    tag=False
+    while True:
+        file_abs_path,line=yield tag
+        tag=False
+        if pattern in line:
+            tag=True
+            target.send(file_abs_path)
+
+@init
+def printer():
+    while True:
+        file_abs_path=yield
+        print(file_abs_path)
+
+
+
+x=r'D:\code\py\py3\Coursepy\L05\a'
+
+
+
+g=search(opener(cat(grep(printer(),'python'))))
+print(g)
+
+g.send(x)
+
+'''
+面向过程的程序设计：是一种流水线式的编程思路，是机械式
+优点：
+    程序的结构清晰，可以把复杂的问题简单
+
+缺点：
+    1 扩展性差
+
+
+应用场景：
+    1 linux内核，git，httpd
+
+'''
+
+
+
+
