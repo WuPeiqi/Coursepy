@@ -53,13 +53,19 @@ def cat(target):
         for line in f:
             #print(line)
            # print('file_abs_path & line : ',file_abs_path,line)
-            target.send((file_abs_path,line))
+            tag=target.send((file_abs_path,line))
+            if tag:
+                break
 @init
 def grep(target,pattern):
+
     while True:
-        file_abs_path,line=yield
+        file_abs_path,line=yield tag
+        tag=False
         if pattern in line:
+            tag=True
             target.send(file_abs_path)
+
 @init
 def printer():
     while True:
