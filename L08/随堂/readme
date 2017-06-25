@@ -1,0 +1,28 @@
+setitem 析构函数?
+getitem
+delitem
+
+__setattr__
+__getattr__
+__delattr__
+
+
+二次加工标准类型(包装)
+List类继承操作 更改取中 更改权限
+
+
+2.授权  定义open函数 针对改写的非类  比如改写open函数
+
+3.实现迭代器
+
+-------------------
+exec 三个参数
+
+
+-----
+元类
+
+--
+socket
+
+异常
