@@ -1,0 +1,9 @@
+作业
+paramiko模块
+
+打开pip官网  保存官网的get_pip.py文件
+执行python get-pip.py
+
+添加环境变量path
+
+pip3 install paramiko
