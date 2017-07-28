@@ -1,6 +1,9 @@
 /.idea/
+/.idea/*
 /.idea
+.idea/*
 */.idea/
+.idea/
 .idea
 *.ob.txt
 # Byte-compiled / optimized / DLL files
