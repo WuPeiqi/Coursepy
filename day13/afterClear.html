@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪类和清除浮动</title>
+    <!--class:after: 伪类
+        clear:both清除浮动
+        position相对定位-->
+<style>
+    .c1{
+        background-color: gold;
+        width: 50px;
+        height: 50px;
+        float: left;
+    }
+    .c2{
+        background-color: yellow;
+        width: 50px;
+        height: 50px;
+        float: left;
+    }
+    .footer
+    {
+        background-color: green;
+        width: 300px;
+        height: 5000px;
+        /*float: left;*/
+    }
+    .clearfix:after{
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .com{
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+    }
+
+</style>
+</head>
+<body>
+<div class="box clearfix">
+    <div class="c1"></div>
+    <div class="c2"></div>
+</div>
+<div class="footer">
+
+</div>
+<div class="com">返回顶部</div>
+</body>
+</html>
