@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .back{
+            width: 100%;
+            height: 1200px;
+            background-color: grey;
+        }
+        .shade{
+            position: fixed;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: darkkhaki;
+            opacity: 0.3;
+        }
+        .model{
+            width: 600px;
+            height: 300px;
+            background-color: white;
+            position: absolute;
+            top: 50%;
+            left:50%;
+            margin-left: -300px;
+            margin-top: -150px;
+            border-radius: 5%;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="back">
+    <input type="button" value="show" id="show">
+</div>
+<div class="shade hide"></div>
+<div class="model hide">
+    <br/>
+    IP地址: <input type="text"><br/>
+    端  口: <input type="text"><br/>
+    机  房: <input type="text"><br/>
+    <input type="button" value="cancel" class="cancel"><br/>
+</div>
+<script>
+    var ele=document.getElementById("show");
+    var eles_shade=document.getElementsByClassName("shade")[0];
+    var eles_model=document.getElementsByClassName("model")[0];
+    var eles_cancel=document.getElementsByClassName('cancel')[0];
+    ele.onclick=function () {
+
+        eles_shade.classList.remove("hide");
+        eles_model.classList.remove("hide");
+    };
+    eles_cancel.onclick=function () {
+//方式一
+        //        eles_shade.classList.add("hide");
+//        eles_model.classList.add("hide");
+    //方式二  js链式操作单取出来再上追一级
+        this.parentElement.classList.add("hide");
+        this.parentElement.previousElementSibling.classList.add("hide");
+    }
+
+</script>
+
+</body>
+</html>

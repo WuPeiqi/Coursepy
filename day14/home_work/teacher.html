@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<button>全选</button>
+<button>反选</button>
+<button>取消</button>
+<hr>
+<table border="1">
+    <tr>
+        <th></th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>班级</th>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>111</td>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>111</td>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>111</td>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+
+
+    <script>
+        var eles = document.getElementsByTagName("button");
+
+        var ele_checkbox = document.getElementsByTagName("input");
+
+        for (var i = 0; i < eles.length; i++) {
+            eles[i].onclick = function () {
+                if (this.innerHTML == "全选") {
+
+                    for (var j = 0; j < ele_checkbox.length; j++) {
+
+                        ele_checkbox[j].checked = true;
+                    }
+                }
+                else if (this.innerText == "反选") {
+                    for (var j = 0; j < ele_checkbox.length; j++) {
+                        if (ele_checkbox[j].checked) {
+                            ele_checkbox[j].checked = false
+                        }
+                        else {
+                            ele_checkbox[j].checked = true
+                        }
+
+                    }
+
+
+                }
+                else {
+                    for (var j = 0; j < ele_checkbox.length; j++) {
+
+                        ele_checkbox[j].checked = false;
+                    }
+                }
+
+
+            }
+
+
+        }
+
+    </script>
+
+
+</table>
+
+
+</body>
+</html>
