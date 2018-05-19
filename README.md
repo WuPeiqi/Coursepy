@@ -1,2 +1,2 @@
 # Coursepy
-py课程学习内容
+Python课程学习内容
